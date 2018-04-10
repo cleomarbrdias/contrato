@@ -1,0 +1,84 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+  
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="box-body">
+            {if="$error != ''"}
+            <div class="alert alert-danger">
+                {$error}
+            </div>
+            {/if}
+
+            <div class="container">
+                <form action="/responsavel/create/" id="pjForm" name="pjForm" class="form-horizontal col-sm-8" method="POST">
+                    <fieldset>
+
+                        <div class="panel panel-success"> 
+                            <div class="panel-heading"> 
+                                <h3 class="panel-title">Cadastro de Responsável</h3> 
+                            </div> 
+                            <div class="panel-body"> 
+
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="nome">Nome:</label>  
+                                    <div class="col-md-5">
+                                        <input id="nome" required="" value="" ng-model="c.nome" name="nome" ng-required="true" autocomplete="off" type="text" class="form-control input-md" required="">
+
+                                        <input id="idresponsavel" name="idresponsavel" value="" type="hidden">
+                                    </div>
+
+                                </div>
+                                <div style="width: 50%" ng-show="FormPF.nome.$error.required && FormPF.nome.$dirty" class="alert danger">
+                                    Por favor preencher campo nome!
+                                </div>
+
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="email">E-Mail:</label>  
+                                    <div class="col-md-5">
+                                        <input required="" ng-required="true" ng-model="c.email" id="email" name="email" value="" type="email" onblur="validacaoEmail(FormPF.email)"  class="form-control input-md">
+                                        <div style="width: 50%;" id="msgemail"></div>
+                                    </div>
+
+                                </div>
+                                
+
+                                <!-- Button -->
+                             <div class="form-group text-center">
+                                <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                                <button class="btn btn-primary adiciona" type="submit" ng-disabled="!c.nome || !c.email" >Gravar</button>
+                            </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </section>
+
+  
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+

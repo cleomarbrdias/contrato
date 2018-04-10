@@ -1,0 +1,93 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            ADITIVO
+        </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Nº do Contrato: <strong style="font-weight: 600; ">{$numero_contrato}</strong> </label> 
+                        </div>
+                        <div class="form-group">
+                            <label>Contratado: <strong style="font-weight: 600; ">{$contratado}</strong> </label>
+                        </div>
+
+
+                        <form action="/aditivo/create"  method="post" id="aditivo" name="aditivo"  novalidate class="form-horizontal">
+
+
+                            <input id="idcontrato" name="idcontrato" type="hidden" value="{$idcontrato}">
+                            <input id="idusuario" name="idusuario" type="hidden" value='{function="getIdUsuario()"}'>
+                            <div class="form-group">
+
+                                <div class="card-block">
+                                    <h4 style="    margin-left: 2%;font-weight: 600;" class="card-title">Vigência do Contrato</h4>
+
+                                </div>
+
+                                <label class="col-md-2 control-label">Início</label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" ng-required="true" id="data_inicio" name="data_inicio" ng-model="c.data_inicio">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="aditivo.data_inicio.$error.required && aditivo.data_inicio.$touched" class="alert danger">Por favor, informa a data de inicio</div>
+                                <br>
+                                <label class="col-md-2 control-label" for="objeto">Término</label>    
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input type="text" ng-model="c.data_fim" ng-required="true" class="form-control" id="data_fim" name="data_fim">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="aditivo.data_fim.$error.required && aditivo.data_fim.$touched" class="alert danger">Por favor, informa a data de término</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" >Valor do Contrato:</label>  
+                                <div class="col-md-3 input-group">
+                                    <span class="input-group-addon">R$</span>
+                                    <input id="valor_total" name="valor_total" ng-model="c.valor_total"  type="text" placeholder="R$ 35.000,00" class="form-control input-md " required="">
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="aditivo.valor_total.$error.required && aditivo.valor_total.$touched" class="alert danger">Por favor, informe o valor de contrato</div>
+
+                            </div>
+                             <div class="form-group text-center">
+                            <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                            <button class="btn btn-primary adiciona" type="submit"  ng-disabled="!c.data_inicio || !c.data_fim ">Gravar</button>
+                             </div>
+
+                        </form>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+
+
+
+
+
+

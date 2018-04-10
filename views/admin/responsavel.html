@@ -1,0 +1,63 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Lista de Responsáveis
+        </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-header" style="background: none !important;">
+                        <a href="/responsavel/create" class="btn btn-success">Cadastrar Responsável</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="tableContratos" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loop="$responsavel"}
+                                <tr>
+
+                                    <td><a style="margin-left: 10%;" href="/responsavel/update/{$value.pk_id}" title="{$value.nom_email}" alt="{$value.nom_email}">{$value.nom_email}</a></td>
+                                    <td><a style="margin-left: 10%;" title="Enviar E-mail" alt="Enviar Email" href="mailto:{$value.email}">{$value.email}</a>
+                                        </td>
+                                    <td class="text-center" >
+                                       <a style="margin-left: 10%;" href="/responsavel/update/{$value.pk_id}" title="{$value.nom_email}" alt="{$value.nom_email}">
+                                            <span style="width: 25px" class='glyphicon glyphicon-pencil icons' aria-hidden='true'></span>
+                                        </a>
+                                                     
+                                    </td/>
+
+                                </tr>
+                                {/loop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+

@@ -1,0 +1,186 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Lista de Contratos
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active"><a href="/admin/users">Usuários</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box">
+      
+          <div class="box-body">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Objeto</a></li>
+              <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Parcelas</a></li>
+              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                <b>How to use:</b>
+
+                   <label>Nº do Contrato:</label>
+                            <input autocomplete="off" maxlength="9" id="nContrato" ng-model="c.nContrato" ng-required="true" name="nContrato" class="form-control" required="true" placeholder="Nº Contrato"/>
+                            <input id="registro" value="" type="hidden">
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+                The European languages are members of the same family. Their separate existence is a myth.
+                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+                in their grammar, their pronunciation and their most common words. Everyone realizes why a
+                new common language would be desirable: one could refuse to pay expensive translators. To
+                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+                words. If several languages coalesce, the grammar of the resulting language is more simple
+                and regular than that of the individual languages.
+              </div>
+              <!-- /.tab-pane -->
+           
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+
+           <form id="contrato" name="contrato">
+                <table>
+                    <tr>
+                        <td>
+                        
+                        </td>
+                    </tr>
+                    <input type="hidden" id="idUsuario" name="idUsuario" value="">
+                    <tr>
+
+                        <td>
+                            <label style="padding: 2% 2% 3% 0;">Contratado:</label>
+                            <select  ng-required="true" ng-model="c.contratado" id="contratado" name="contratado" class="form-control" >
+                                <option value="" selected disabled>Nome do Contratado</option>
+                                {loop="$fornecedor"}
+                                    <option value='{$value.pk_tb_id_fornecedor_consultor}'>{$value.nome_razao}</option>
+
+                                {/loop}
+                                
+                            </select>
+                           
+                        </td>
+                    </tr>
+                        <tr>
+
+                        <td>
+                            <label style="padding: 2% 2% 3% 0;">Responsável:</label>
+                            <select  ng-required="true" ng-model="c.responsavel" id="responsavel" name="responsavel" class="form-control" >
+                                <option value="" selected disabled>Nome do responsavel</option>
+                                {loop="$responsavel"}
+                                    <option value='{$value.pk_id}'>{$value.nom_email}</option>
+                                {/loop}
+                            </select>
+                   
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="padding: 2% 2% 3% 0;">Objeto:</label>
+                            <textarea  maxlength="500" ng-minlength="20" ng-required="true" ng-model="c.objeto" id="objeto" name="objeto" class="form-control" style="width: 550px; height: 150px"></textarea>
+                  
+                        </td>
+                    </tr>
+                    <tr>  <td> <label style="padding: 2% 2% 3% 0;">Vigencia do Contrato:</label></td></tr>
+                    <tr>
+                      <td style="width: 220px; margin-right: 5%; overflow: hidden;display: inline-block; white-space: nowrap;">
+                            Início: 
+
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" id="data_inicio" name="data_inicio">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td style="width: 200px !important; display: inline-block;">
+                            Término:
+
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" id="data_fim" name="data_fim">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="padding: 2% 2% 3% 0;">Valor do Contrato:</label>
+                            <input ng-model="c.valorcontrato" ng-required="true" id="valorcontrato" name="valorcontrato" style="width: 200px !important" class="form-control" placeholder="R$ 35.000,00"/>
+                        </td>
+                    </tr>
+                    <tr>  <td> <label style="padding: 2% 2% 3% 0;">Valor das parcelas:</label></td></tr>
+                </table>
+                <div class="col-xs-6 col-md-4" style="margin-left: 0; padding-left: 0;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Valor</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $("#valorparcela").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                                $("#valorcontrato").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+                            });
+                        </script>
+                       <tr>
+                            <td><input name="noData" id="noData" class="form-control" style="width: 100px;"></td>
+                            <td><input name="valorparcela" id="valorparcela" value="" class="form-control" style="width: 150px;" ></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" style="text-align: left; padding: 2% 2% 3% 0;">
+                                    <button class="btn btn-large  adiciona" onclick="AddTableRow(this)" type="button">Adicionar Parcelas</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="espaco"></div>
+                <table id="products-table" class="table table-hover ">
+                    <tbody>
+                        <tr style="display: inline-block;">
+                            <th class="bd_titulo">Data</th>
+                            <th class="bd_titulo">Valor da parcelas</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                <button class="btn btn-large adiciona" type="submit" ng-disabled="!c.nContrato || !c.contratado || !c.objeto || !c.dataInicio || !c.dataFim || !c.valorcontrato || !c.responsavel" >Gravar</button>
+            </form>
+
+ 
+            </div>
+            <!-- /.box-body -->
+          </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

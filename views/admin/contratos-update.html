@@ -1,0 +1,243 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Editar Contrato
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="/admin/users">Usuários</a></li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+
+                    <div class="box-body">
+                        <form action="/contrato/update" method="post" id="contrato" name="contrato" novalidate class="form-horizontal">
+                            <input type="hidden" id="numerocontrato" name="numerocontrato" value='{$idcontrato}'>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Nº do Contrato:</label>  
+
+                                <div class="col-md-3">
+                                    <input id="numero_contrato" maxlength="9" ng-required="true"  name="numero_contrato" type="text" placeholder="Nº do Contrato" class="form-control input-md" value='{$numero_contrato}'>
+                                    <div  style="width: 150%;" ng-show="contrato.numero_contrato.$error.required && contrato.numero_contrato.$touched" class="alert danger">
+                                        Por favor, informe o numéro de contrato.
+                                    </div> 
+                                </div>
+                            </div>
+                            <!-- Inicio Select Contratado -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Contratado</label>
+                                <div class="col-md-6">
+                                    <select ng-required="true" name="fk_id_fornecedor_consultor" id="fk_id_fornecedor_consultor" class="form-control">
+                                        <option value="{@idcontratado}" selected disabled>{$contratado}</option>
+                                        {loop="$fornecedor"}
+                                        <option value='{$value.pk_tb_id_fornecedor_consultor}'>{$value.nome_razao}</option>
+                                        {/loop}
+
+                                    </select>
+                                    <div style="width: 50%;" ng-show="contrato.fk_id_fornecedor_consultor.$error.required && contrato.fk_id_fornecedor_consultor.$touched" class="alert danger">
+                                        Por favor, selecione uma opção.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Final Select Contratado -->
+                            <!-- Inicio Select Responsavel -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Responsável</label>
+                                <div class="col-md-6">
+                                    <select nd-required="true" id="fk_id_email" name="fk_id_email" class="form-control">
+                                        <option value="{$idresponsavel}"  selected disabeld>{$responsavel}</option>
+                                        {loop="$responsavel"}
+                                        <option value='{$value.pk_id}'>{$value.nom_email}</option>
+                                        {/loop}
+                                    </select>
+                                    <div style="width: 50%;" ng-show="contrato.fk_id_email.$error.required && contrato.fk_id_email.$touched" class="alert danger">
+                                        Por favor, selecione uma opção.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Final Select Responsavel -->
+                            <input type="hidden" name="fk_id_user" id="fk_id_user" value='{function="getIdUsuario()"}'/>
+                            <!-- Inicio textarea Objeto -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Objeto:</label>
+                                <div class="col-md-4">                     
+                                    <textarea name="objeto" id="objeto" maxlength="500" style="width: 476px; height: 150px" class="form-control" ng-minlength="50"  ng-required="true" placeholder="Informe o objeto de contrato.">{$objeto}</textarea>
+                                    <div ng-show="contrato.objeto.$error.required && contrato.objeto.$touched" class="alert danger">Por favor, descreva o objeto do contrato.</div>
+                                    <div ng-show="contrato.objeto.$error.minlength" class="alert danger">
+                                        O campo deve conter pelo menos 20 caracteres de descrição do objeto.</div>
+                                </div>
+
+                            </div>
+                            <!-- final textarea Objeto -->
+                            <!-- inicio campos data vigencia -->
+                            <div class="form-group">
+
+                                <label class="col-md-2 control-label">Início do Contrato:</label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" ng-required="true" id="data_inicio" name="data_inicio" value="{$data_inicio}">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="contrato.data_inicio.$error.required && contrato.data_inicio.$touched" class="alert danger">Por favor, informa a data de inicio</div>
+                                <br>
+                                <label class="col-md-2 control-label" for="objeto">Término do Contrato:</label>    
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input type="text" value="{$data_fim}" ng-required="true" class="form-control" id="data_fim" name="data_fim">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="contrato.data_fim.$error.required && contrato.data_fim.$touched" class="alert danger">Por favor, informa a data de término</div>
+                            </div>
+
+                            <!-- final campos data vigencia -->
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" >Valor do Contrato:</label>  
+                                <div class="col-md-3 input-group">
+                                    <span class="input-group-addon">R$</span>
+                                    <input id="valor_total" name="valor_total" value="{$valor_total}" ng-required="true" type="text" placeholder="R$ 35.000,00" class="form-control input-md " required="">
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="contrato.valor_total.$error.required && contrato.valor_total.$touched" class="alert danger">Por favor, informe o valor de contrato</div>
+
+                            </div>
+                            <!--div class="form-group">
+                                <label class="col-md-2 control-label">Parcelas Adicionadas</label><br>
+                                <div class="col-md-4">
+                                    <table id="products-table-1" class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th style='width: 200px'   class="bd_titulo">Data</th>
+                                                <th style='width: 200px'  class="bd_titulo">Valor da parcelas</th>
+                                            </tr>
+                                            {if="$parcela"}
+                                            {loop="$parcela"}
+                                            <tr>
+                                                <td>  <select style="padding: 6px;" id='tipo_alteracao' name='tipo_alteracao[]' class='form-modifica' required=''>
+                                                        <option value='1' title="Alterar">A</option>
+                                                        <option value='2' title="Remover">R</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type='hidden'  name='id_parcela[]' id='id_parcela' value='{$value.pk_id}'>
+                                                    <div class="col-md-3 input-group date" data-provide="datepicker">
+                                                        <input style="width: 150px;" type="text" class="form-control" id="data-parcela" name="data-parcela[]" maxlength='10' value='{$value.data}'>
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-th"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-3 input-group">
+                                                        <span class="input-group-addon">R$</span>
+                                                        <input id="" class="valor-parcela" name="valor-parcela[]" value="{$value.valor_parcela}" maxlength='20' ng-required="true" type="text" placeholder="R$ 35.000,00" class="form-control input-md " required="required"   style='width: 150px; padding: 2%;'>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            {/loop}
+                                            {/if}
+
+                                        </tbody>
+                                    </table>
+                                </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Parcelas:</label><br>
+                                <div class="col-md-4">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Valor</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="col-md-3 input-group date" data-provide="datepicker">
+                                                        <input style="width: 150px;" type="text" ng-model="c.dataparcela" ng-required="true" class="form-control" id="dataparcela" name="dataparcela">
+
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-th"></span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div  ng-show="contrato.dataparcela.$error.required && contrato.dataparcela.$touched" class="alert danger">
+                                                        Por favor, o campo data deve ser informado.
+                                                    </div>
+
+                                                </td>
+                                                <td>
+                                                    
+                                                    <div class="col-md-3 input-group">
+                                                        <span class="input-group-addon">R$</span>
+                                                        <input id="envalorparcela" class="valor-parcela" name="envalorparcela" value="" ng-model="c.envalorparcela" maxlength='20' ng-required="true" type="text" placeholder="R$ 35.000,00" class="form-control input-md " required="required"   style='width: 150px; padding: 2%;'>
+                                                    </div>
+                                                    
+                                                     <div ng-show="contrato.envalorparcela.$error.required && contrato.envalorparcela.$touched" class="alert danger">
+                                                        Por favor, valor da parcela deve ser informado.
+                                                    </div>
+                                                   
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" style="text-align: left; padding: 2% 2% 3% 0;">
+                                                    <button ng-disabled="!c.dataparcela || !c.envalorparcela"class="btn btn-large  adiciona" onclick="AddTableRow(this)" type="button">Adicionar Parcelas</button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div class="espaco"></div>
+                                    <table id="products-table" class="table table-hover ">
+                                        <tbody>
+                                            <tr style="display: inline-block;">
+                                                <th class="bd_titulo">Data</th>
+                                                <th class="bd_titulo">Valor da parcelas</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                </div-->
+
+
+                            </div>
+
+
+                            <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                            <button class="btn btn-primary adiciona" type="submit" >Gravar</button>
+                        </form>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

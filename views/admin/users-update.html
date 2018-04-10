@@ -1,0 +1,56 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <!--h1>
+    Lista de Usuários
+  </h1-->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Editar Usuário</h3>
+        </div>
+                     {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="/usuario/update" method="post">
+          <div class="box-body">
+              <input type="hidden" id="id_usuario" name="id_usuario" value="{$id_usuario}">
+            <div class="form-group">
+              <label for="desperson">Nome<span class="campoobrigatorio"> *</span></label>
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" value="{$nome}">
+            </div>
+            <div class="form-group">
+              <label for="deslogin">Login<span class="campoobrigatorio"> *</span></label>
+              <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Digite o login"  value="{$user_name}">
+            </div>
+            <div class="form-group">
+              <label for="desemail">E-mail<span class="campoobrigatorio"> *</span></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Digite o e-mail" value="{$email}">
+            </div>
+     
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+              <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

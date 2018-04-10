@@ -1,0 +1,295 @@
+<!-- Main Footer -->
+<footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+        CONASS
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2018 <a href="#">CONASS</a>.</strong> All rights reserved.
+</footer>
+
+
+</div>
+<!-- ./wrapper -->
+
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 2.2.3 -->
+<script src="/res/admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="/res/admin/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/res/admin/dist/js/app.min.js"></script>
+
+<script src="/res/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/res/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="/res/admin/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/res/admin/plugins/datepicker/locales/bootstrap-datepicker.pt-BR.js"></script>
+<script src="/res/admin/plugins/chartjs/Chart.min.js"></script>
+<script src="/res/admin/plugins/chartjs/Chart.bundle.js"></script>
+<script src="/res/admin/plugins/person/jquery.maskMoney.min.js"></script>
+<script src="/res/admin/plugins/person/jquery.mask.min.js"></script>
+<script src="/res/admin/plugins/person/mask.js"></script>
+<script src="/res/admin/plugins/angular/angular.js"></script>
+<script src="/res/admin/plugins/angular/app.js"></script>
+
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+
+<script>
+    
+    
+    $(function ($) {
+        $(document).ready(function () {
+        setTimeout(function () {
+            $('.alert').fadeOut(1500);
+        }, 3000);
+            });
+         $('#tableContratos').DataTable({
+            "language": {
+                "url": "/res/admin/plugins/person/Portuguese-Brasil.json"
+            },
+            "lengthMenu": [[16], [16]],
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true
+        });
+          $('#tableResponsavel').DataTable({
+            "language": {
+                "url": "/res/admin/plugins/person/Portuguese-Brasil.json"
+            },
+            "lengthMenu": [[20], [20]],
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true
+        });
+        
+   
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $.fn.datepicker.defaults.language = "pt-BR";
+
+        $("#envalorparcela").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+
+        $("#valor_total").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+        $("#valor_bruto").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+         $(".valor-parcela").maskMoney({prefix: 'R$ ', allowNegative: true, thousands: '.', decimal: ',', affixesStay: false});
+
+        RemoveTableRow = function (handler) {
+            var contparcela = parseInt(document.getElementById('confparcela').value);
+            contparcela = contparcela - 1;
+            $(confparcela).val(contparcela);
+           
+            var tr = $(handler).closest('tr');
+            tr.fadeOut(400, function () {
+                tr.remove();
+            });
+            return false;
+        };
+
+        AddTableRow = function () {
+
+            var parcela = document.getElementById('envalorparcela').value;
+            var dataParcela = document.getElementById('dataparcela').value;
+            var contparcela = parseInt(document.getElementById('confparcela').value);
+            
+            
+            if(contparcela == 0){
+                contparcela = 1;
+            }else{
+                contparcela = contparcela + 1;
+            }
+            
+
+            var newRow = $("<tr>");
+            var cols = "";
+
+            cols += "<td style='width: 200px;'><input type='text' required='' name='data-parcela[]' id='data-parcela' value='" + dataParcela + "'></td>";
+            cols += "<td style='width: 200px;'><input type='text' required='' name='valor-parcela[]' id='valor-parcela' value='" + parcela + "'></td>";
+            cols += "<td class='actions'>";
+            cols += "<button class='btn btn-large bt-trash' onclick='RemoveTableRow(this)' type='button'><a href='#' class='removerCampo' title='Remover linha'><i class='fa fa-trash' aria-hidden='true'></i></a></button>";
+            cols += "</td>";
+
+            newRow.append(cols);
+            $("#products-table").append(newRow);
+            $(":text").each(function () {
+                $(envalorparcela).val('');
+                $(dataparcela).val('');
+                $(confparcela).val(contparcela);
+                
+
+            });
+            return false;
+        };
+
+        $('#example').DataTable({
+            "language": {
+                "url": "/res/admin/plugins/person/Portuguese-Brasil.json"
+            },
+            
+            "lengthMenu": [[5], [5]],
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": false,
+            "autoWidth": true
+        });
+
+
+        $('#parcelaspagas').DataTable({
+            "language": {
+                "url": "/res/admin/plugins/person/Portuguese-Brasil.json"
+            },
+            
+            "lengthMenu": [[5], [5]],
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": false,
+            "autoWidth": true
+        });
+           $('#tabaditivos').DataTable({
+            "language": {
+                "url": "/res/admin/plugins/person/Portuguese-Brasil.json"
+            },
+            "lengthMenu": [[5], [5]],
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": false,
+            "autoWidth": true
+        });
+               
+
+        
+    });
+
+
+
+</script>
+
+
+<script type="text/javascript">
+    if($('#saldo').val()){
+            var ctx = document.getElementById("myChart").getContext('2d');
+    var saldo = $('#saldo').val();
+    var pago = $('#pago').val();
+    var progress = document.getElementById('animationProgress');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+
+            datasets: [{
+                    data: [saldo, pago],
+                    backgroundColor: [
+                        '#00a65a',
+                        '#FF0000'
+                    ]
+                }],
+            labels: [
+                'Disponível',
+                'Utilizado'
+            ]
+        },
+        options: {
+
+        }
+
+    });
+        
+    }
+
+</script>
+
+<script type="text/javascript">
+            (function ($) {
+                RemoveTableRow = function (handler) {
+                    var tr = $(handler).closest('tr');
+                    tr.fadeOut(400, function () {
+                        tr.remove();
+                    });
+                    return false;
+                };
+                AddTableRow = function () {
+                    var parcela = document.getElementById('valorparcela').value;
+                    var dataParcela = document.getElementById('noData').value;
+
+                    var newRow = $("<tr>");
+                    var cols = "";
+
+                    cols += "<td style='width: 200px'><input type='text' required='' name='n-data-parcela[]' id='n-data-parcela' value='" + dataParcela + "'></td>";
+                    cols += "<td style='width: 200px'><input type='text' required='' name='n-valor-parcela[]' id='n-valor-parcela' value='" + parcela + "'></td>";
+                    cols += "<td class='actions'>";
+                    cols += "<button class='btn btn-large btn-danger' onclick='RemoveTableRow(this)' type='button'><a href='#' class='removerCampo' title='Remover linha'><p class='remove'>r</p></a></button>";
+                    cols += "</td>";
+                    newRow.append(cols);
+                    $("#products-table").append(newRow);
+                    $(":text").each(function () {
+                        $(valorparcela).val('');
+                        $(noData).val('');
+                    });
+                    return false;
+                };
+            })(jQuery);
+        </script> 
+    
+            <script language="javaScript">
+
+            $(function () {
+                $('#cnpj').bind('keydown', soNums); // o "#input" é o input que vc quer aplicar a funcionalidade
+
+            });
+            $(function () {
+                $('#cep').bind('keydown', soNums); // o "#input" é o input que vc quer aplicar a funcionalidade
+                $('#dt_nascimento').bind('keydown', soNums);
+                $('#cpf').bind('keydown', soNums);
+                $('#cnpg').bind('keydown', soNums);
+
+            });
+            function soNums(e) {
+
+                //teclas adicionais permitidas (tab,delete,backspace,setas direita e esquerda)
+                keyCodesPermitidos = new Array(8, 9, 37, 39, 46);
+                //numeros e 0 a 9 do teclado alfanumerico
+                for (x = 48; x <= 57; x++) {
+                    keyCodesPermitidos.push(x);
+                }
+
+                //numeros e 0 a 9 do teclado numerico
+                for (x = 96; x <= 105; x++) {
+                    keyCodesPermitidos.push(x);
+                }
+
+                //Pega a tecla digitada
+                keyCode = e.which;
+                //Verifica se a tecla digitada é permitida
+                if ($.inArray(keyCode, keyCodesPermitidos) != -1) {
+                    return true;
+                }
+                return false;
+            }
+
+            var maskBehavior = function (val) {
+                return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+            },
+                    options = {onKeyPress: function (val, e, field, options) {
+                            field.mask(maskBehavior.apply({}, arguments), options);
+                        }
+                    };
+           $('#telefone').mask(maskBehavior, options);
+        </script>           
+
+</body>
+</html>

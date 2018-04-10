@@ -1,0 +1,282 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li>Adicionar =></li>
+            <li title="Adicionar Aditivo"><a href="/aditivo/create/{$pk_di}">Aditivo</a></li>
+            <li title="Adicionar Parcela"><a href="/parcela-create/{$pk_di}">Parcela</a></li>
+            <li title="Adicionar Produto"><a href="/produto-create/{$pk_di}">Pagamentos</a></li>
+
+
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="box-body">
+            {if="$error != ''"}
+            <div class="alert alert-danger">
+                {$error}
+            </div>
+            {/if}
+            <div class="col-lg-6">
+                <div class="container">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Nº do Contrato: <strong style="font-weight: 600; ">{$numero_contrato}</strong> </label>
+                                <!--                            <input autocomplete="off" maxlength="9" id="nContrato" value=" ng-required="true" name="nContrato" class="form-control" required="true" OnKeyPress="formatar('####/####', this)" placeholder="Nº Contrato"/>
+                                                        <div style="width: 70%;" ng-show="contrato.nContrato.$error.required && contrato.nContrato.$touched" class="alert danger">
+                                                            Por favor, preencher o campo data corretamente.
+                                                        </div>-->
+                                <input id="registro" value="" type="hidden">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="padding: 2% 2% 3% 0;">Contratado: <strong style="font-weight: 600; text-transform: uppercase;">{$contratado}</strong></label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="padding: 2% 2% 3% 0;">Responsável: <strong style="font-weight: 600; text-transform: uppercase;">{$responsavel}</strong></label>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label style="padding: 2% 2% 3% 0;">Objeto:</label>
+                                <textarea ng-minlength="20" ng-required="true" id="objeto" disabled name="objeto" class="form-control" style="width: 550px; height: 150px">{$objeto}</textarea>
+
+                            </td>
+                        </tr>
+                        <tr>  <td> <label style="padding: 2% 2% 3% 0;">Vigencia do Contrato:</label></td></tr>
+                        <tr>
+                            <td style="width: 220px; overflow: hidden;display: inline-block; white-space: nowrap;">
+                                Início: <input disabled value="{$data_inicio}" ng-required="true" id="dataInicio" style="width: 200px !important" name="dataInicio" maxlength="10" minlength="10"  OnKeyPress="formatar('##/##/####', this)" placeholder="__/___/___" class="form-control"/>
+                            </td>
+
+                            <td style="width: 200px !important; display: inline-block;">
+                                Término: <input disabled value="{$data_fim}" ng-required="true" id="dataFim" style="width: 200px !important" name="dataFim" maxlength="10"  OnKeyPress="formatar('##/##/####', this)" placeholder="__/___/___" class="form-control"/>
+                            </td>
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <label style="padding: 2% 2% 3% 0;">Valor do Contrato:</label>
+
+                                <input disabled value="R$ {$valor_total}" ng-required="true" id="valorcontrato" name="valorcontrato" style="width: 200px !important" class="form-control" placeholder="R$ 35.000,00"/>
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+
+                    <div class="col-xs-6 col-md-7" style="margin-left: 0; padding-left: 0;">
+                        <div class="row" style="margin-top: 3%; border-top: 1px solid #ccc; padding: 1%;">
+
+                            <ul class="nav nav-tabs">
+                                {if="$aditivo"}
+                                <li class="active"><a href="#first-tab"  data-toggle="tab">ADITIVOS</a></li>
+                                {/if}
+                                {if="$parcela"}
+                                <li><a href="#second-tab" data-toggle="tab">PARCELAS</a></li>
+                                {/if}
+                                {if="$parcelaspagas"}
+                                <li><a href="#parcelas-tab" data-toggle="tab">PAGAMENTOS</a></li>
+                                {/if}
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active in" id="first-tab">
+                                    <div class="panel panel-default tabela-parcela">
+                                        {if="$aditivo"}
+                                        <div class="panel-heading" style="padding: 2% 2% 3% 0; font-weight: 600; text-transform: uppercase;text-align: -webkit-center;
+                                             text-align: center;">ADITIVOS:</div>
+                                                                              
+                                        <table id="tabaditivos" class="display" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Início</th>
+                                                    <th class="text-center">Término</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                 {$a=1}
+                                        {loop="$aditivo"}
+                                                <tr>
+                                                    <td class="text-center" style="width: 10px;">{$value.dt_inicio_ad}</td>
+                                                    <td class="text-center">{$value.dt_fim_ad}</td>
+                                                    <td class="text-center">R$ {$value.valor_ad}</td>
+                                                    <td style='width: 50px !important; display: inline-block;padding:1% 1% 1% 0;margin-left: 30%;'>
+                                                        <a  title='Editar' alt='Editar' href='/aditivo/update/{$value.fk_id}/contrato/{$pk_di}'>
+                                                            <span style="width: 25px" class='glyphicon glyphicon-pencil icons' aria-hidden='true'></span>
+                                                        </a>
+                                                        <a  title='Excluir Registro' alt='Excluir Registro' href='/aditivo/delete/{$value.fk_id}/contrato/{$pk_di}'>
+                                                            <span  class='glyphicon glyphicon glyphicon-trash icons' aria-hidden='true'></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                {$a = $a +1}
+                                                {/loop}
+
+                                                {/if}
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="second-tab">
+
+                                    <div class="panel panel-default tabela-parcela">
+                                        <!-- Default panel contents -->
+                                        {if="$parcela"}
+                                        <div class="panel-heading" style="padding: 2% 2% 3% 0; font-weight: 600; text-transform: uppercase;text-align: -webkit-center;
+                                             text-align: center; ">Valor das parcelas:</div>
+                                        {$a=1}
+                                        <table id="example" class="display" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th><i class="fa fa-sort-numeric-asc" aria-hidden="true"></i></th>
+                                                    <th class="text-center">Data</th>
+                                                    <th class="text-center">Valor</th>
+                                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {loop="$parcela"}
+                                                <tr>
+                                                    <td class="text-center" style="width: 10px;">{$a}</td>
+                                                    <td class="text-center">{$value.data}</td>
+                                                    <td class="text-center">R$ {$value.valor_parcela}</td>
+                                                    <td style='width: 50px !important; display: inline-block;padding:1% 1% 1% 0;margin-left: 30%;'>
+                                                        <a  title='Editar' alt='Editar' href='/parcela/update/{$value.pk_id}/contrato/{$value.fk_contrato}'>
+                                                            <span style="width: 25px" class='glyphicon glyphicon-pencil icons' aria-hidden='true'></span>
+                                                        </a>
+                                                        <a  title='Excluir Registro' alt='Excluir Registro' href='/parcela/delete/{$value.pk_id}/contrato/{$value.fk_contrato}'>
+                                                            <span  class='glyphicon glyphicon glyphicon-trash icons' aria-hidden='true'></span>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                {$a = $a +1}
+                                                {/loop} 
+                                            </tbody>
+                                        </table>
+                                        {/if}
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="parcelas-tab">
+
+                                    <div class="panel panel-default tabela-parcela">
+                                        <!-- Default panel contents -->
+                                        
+                                        {if="$parcelaspagas"}
+                                        <div class="panel-heading" style="padding: 2% 2% 3% 0; font-weight: 600; text-transform: uppercase;text-align: -webkit-center;
+                                             text-align: center; ">Pagamentos Realizados</div>
+                                        {$a=1}
+                                        <table id="parcelaspagas" class="display" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Entrada</th>
+                                                    <th class="text-center">Descrição</th>
+                                                    <th class="text-center">Valor Bruto</th>
+                                                    <th class="text-center"><i class="fa fa-cog" aria-hidden="true"></i></th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {loop="$parcelaspagas"}
+                                                <tr>
+                                                    <td>{$value.dt_entrada_produto}</td>
+                                                    <td>{$value.descricao_produto}</td>
+                                                    <td>R$ {$value.valor_bruto}</td>
+                                                     <td style='width: 90px; display: inline-block;padding:1% 1% 1% 0;margin-left: 30%;'>
+                                                        <a  title='Editar' alt='Editar' href='/produto/update/{$value.id}/contrato/{$value.fk_id_contrato}'>
+                                                            <span style="width: 25px" class='glyphicon glyphicon-pencil icons' aria-hidden='true'></span>
+                                                        </a>
+                                                        <a  title='Excluir Registro' alt='Excluir Registro' href='/produto/delete/{$value.id}/contrato/{$value.fk_id_contrato}'>
+                                                            <span  class='glyphicon glyphicon glyphicon-trash icons' aria-hidden='true'></span>
+                                                        </a>
+                                                    </td>
+
+
+                                                </tr>
+                                                {$a = $a +1}
+                                                {/loop}
+                                            </tbody>
+
+                                        </table>
+                                        {/if}
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- inicio grafico -->
+            <div class="col-xs-5 text-center grafico-contrato">
+                <input id="saldo" type="hidden" value="{$saldo}">
+                <input id="pago" type="hidden" value="{$pago}">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Saldo Contratual: R$ {$saldoContratual}</font></font></h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="myChart" width="400" height="400"></canvas>
+
+
+                        </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+    <!-- Button -->
+    <div class="row">
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="enviar"></label>
+            <div class="col-md-4">
+                <button id="enviar" type="submit" name="Canelar" class="btn btn-large btn-danger" onClick="history.go(-1)">Voltar</button>
+                <a href="/contrato/update/{$pk_di}"><button id="enviar" name="Canelar" class="btn btn-large btn-success">Editar</button></a>
+            </div>    
+
+
+        </div> 
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+

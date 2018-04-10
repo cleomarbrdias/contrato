@@ -1,0 +1,156 @@
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            {$nome}
+        </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                     <div class="box-body">
+                         <form action="/consultor/update" id="pjForm" name="pjForm" class="form-horizontal col-sm-8" method="POST">
+                            <fieldset>
+
+                                <!-- Form Name -->
+                                <!-- Form Name -->
+
+                                <div class="panel panel-success"> 
+                                    <div class="panel-heading"> 
+                                        <h3 class="panel-title">Consultor</h3> 
+                                    </div> 
+                                    <div class="panel-body"> 
+
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="nome">Nome:</label>  
+                                            <div class="col-md-5">
+                                                <input id="nome"   value="{$nome}" name="nome" ng-required="true" autocomplete="off" type="text" class="form-control input-md" required="">
+                                                <input id="id_registro" name="pk_tb_id_fornecedor_consultorPrimária" value="{$id}" type="hidden">
+                                            </div>
+
+                                        </div>
+                                        <div style="width: 50%" ng-show="FormPF.nome.$error.required && FormPF.nome.$dirty" class="alert danger">
+                                            Por favor preencher campo nome!
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="cpf">CPF:</label>  
+                                            <div class="col-md-4">
+                                                <input value="{$cpf}" maxlength="14" id="cpf" ng-minlength="minlength"  ng- ng-required="true" name="cpf"  type="text" class="form-control input-md" placeholder="000.000.000-00" class="form-control input-md" OnKeyPress="formatar('###.###.###-##', this)">
+
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%;" ng-show="FormPF.cpf.$error.required && FormPF.cpf.$dirty" class="alert danger">
+                                            Por favor preencher o campo CPF!
+                                        </div>
+                                        <div style="width: 50%; background: red; opacity: 0.8; color: #FFF; " ng-show="FormPF.cpf.$error.minlength" class="alert danger">
+                                            O campo CPF deve conter 11 digitos!
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="rg">RG:</label>  
+                                            <div class="col-md-4">
+                                                <input   id="rg" name="rg"  type="text" value="{$rg}" class="form-control input-md">
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="dt_nascimento">Data Nasc.:</label>  
+                                            <div class="col-md-4">
+                                                <input   id="dt_nascimento" maxlength="10" ng-minlength="10" value="{$dt_nascimento}" name="dt_nascimento" type="text"  class="form-control input-md" onkeypress="formatar('##/##/####', this)">
+
+                                            </div>
+                                        </div>
+                                        <div style="width: 70%;" ng-show="FormPF.dt_nascimento.$error.minlength" class="alert danger">
+                                            Por favor, preencher o campo data (10/10/1988) corretamente.
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="email">E-Mail:</label>  
+                                            <div class="col-md-5">
+                                                <input   id="email" name="email" value="{$email}" type="email" onblur="validacaoEmail(FormPF.email)"  class="form-control input-md">
+                                                <div style="width: 50%;" id="msgemail"></div>
+                                            </div>
+
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="telefone">Telefone:</label>  
+                                            <div class="col-md-4">
+                                                <input   id="telefone" name="telefone" value="{$telefone}" type="text" class="form-control input-md telefone">
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="endereco">Endereço:</label>  
+                                            <div class="col-md-8">
+                                                <textarea   name="endereco" name="endereco" id="endereco" required="" ng-required="true" class="form-control input-md">{$endereco}</textarea>
+                                                
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="cep">CEP:</label>  
+                                            <div class="col-md-4">
+                                                <input   autocomplete="off" id="cep" name="cep" maxlength="10" ng-minlength="10" value="{$cep}" type="text" class="form-control input-md" onkeypress="formatar('##.###-###', this)">
+
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%" class="alert danger" ng-show="FormPF.cep.$error.minlength">
+                                            Por favor preencher campo corretamente!
+                                        </div>
+
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label" for="enviar"></label>
+                                            <div class="col-md-4">
+                                                <button id="enviar" type="submit" name="Canelar" class="btn btn-large btn-danger" onClick="history.go(-1)">Voltar</button>
+                                                <button type="submit" id="editar" name="Editar" title="Editar" class="btn btn-large btn-success">Gravar</button>
+                                                
+                                            </div>
+                                            <div class="col-md-4">
+
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

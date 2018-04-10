@@ -1,0 +1,64 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+           Categorias
+        </h1>
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-header" style="background: none !important;">
+                        <a href="/categoria/create" class="btn btn-success">Cadastrar Contrato</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="tableResponsavel" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>N.</th>
+                                    <th>Categoria</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loop="$categoria"}
+                                <tr>
+
+                                    <td class="text-center"><a style="margin-left:3%; " href="/categoria/update/{$value.id_categoria}" class="link" title="Visualizar Categoria">{$value.id_categoria}</a>
+                                    </td>
+                                    <td class="text-center">{$value.no_categoria}</td>
+                                    
+                                    <td class="text-center">
+                                        <a style="margin-left: 10%;" href="/categoria/update/{$value.id_categoria}" title="Editar" alt="Editar">
+                                            <span style="width: 25px" class="glyphicon glyphicon-pencil icons" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/loop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

@@ -1,0 +1,60 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Lista de Usuários
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active"><a href="/usuario/create">Cadastrar Usuário</a></li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-primary">
+            
+                    <br>
+
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Login</th>
+                    <!--th style="width: 60px">Admin</th-->
+                    <th style="width: 140px">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loop="$usuario"}
+                  <tr>
+                    <td>{$value.id_usuario}</td>
+                    <td style="margin-left: 3%;">{$value.nome}</td>
+                    <td>{$value.email}</td>
+                    <td>{$value.user_name}</td/>
+                    
+                    <td>
+                      <a href="/usuario/update/{$value.id_usuario}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <!--a href="/admin/users/{$value.id_usuario}/delete" onclick="return confirm('Deseja realmente excluir este registro?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a-->
+                    </td>
+                  </tr>
+                  {/loop}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

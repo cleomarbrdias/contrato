@@ -1,0 +1,34 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            ALTERAR - SENHA
+        </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content"></section>
+  
+   <div class="help-block text-center">
+     Olá {function="getUserName()"}, digite uma nova senha:
+    </div>
+
+  <!-- START LOCK SCREEN ITEM -->
+  <div class="lockscreen-item">
+
+    <!-- lockscreen credentials (contains the form) -->
+    <form  action="/pass/senha" method="post">
+      <input type="hidden" name="id_usuario" name="id_usuario" value='{function="getIdUsuario()"}'>
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="Digite a nova senha" name="password">
+        <div class="input-group-btn">
+          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+        </div>
+      </div>
+    </form>
+    <!-- /.lockscreen credentials -->
+
+  </div>
+ </div>  

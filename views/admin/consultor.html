@@ -1,0 +1,70 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Lista de Contratos
+        </h1>
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-header" style="background: none !important;">
+                        <a href="/consultor/create" class="btn btn-success">Cadastrar Contrato</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="tableResponsavel" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Data Nasc.</th>
+                                    <th>Telefone</th>
+                                    <th>Email</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loop="$consultor"}
+                                <tr>
+
+                                    <td><a style="margin-left:3%; " href="/consultor/{$value.pk_tb_id_fornecedor_consultor}" class="link" title="Visualizar Contrato">{$value.nome_razao}</a>
+                                    </td>
+                                    <td class="text-center">{$value.dt_nascimento}</td>
+                                    <td class="text-center">{$value.telefone}</td>
+                                    <td><a style="margin-left:3%; " title="Enviar E-mail" alt="Enviar Email" href="mailto:{$value.email_fc}">{$value.email_fc}</a></td>
+                                    <td>
+                                        <a title="Enviar E-mail para {$value.nome_razao}" alt="Enviar E-mail para {$value.nome_razao}" href="mailto:{$value.email_fc">
+                                            <span style="width: 25px" class="glyphicon glyphicon-send icons" aria-hidden="true"></span>
+                                        </a>
+                                        <a style="margin-left: 10%;" href="/consultor/{$value.pk_tb_id_fornecedor_consultor}" title="Editar" alt="Editar">
+                                            <span style="width: 25px" class="glyphicon glyphicon-pencil icons" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/loop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

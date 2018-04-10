@@ -1,0 +1,70 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Lista de Fornecedor
+        </h1>
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-header" style="background: none !important;">
+                        <a href="/fornecedor/create" class="btn btn-success">Cadastrar Fornecedor</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="tableResponsavel" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="margin-left:3%; text-align: center;">Razão Social</th>
+                                    <th>Atividade</th>
+                                    <th>Telefone</th>
+                                    <th>Contato</th>
+                                    <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loop="$fornecedor"}
+                                <tr>
+
+                                    <td><a style="margin-left:3%; text-transform: uppercase; " href="/fornecedor/{$value.pk_tb_id_fornecedor_consultor}" class="link" title="Visualizar Fornecedor">{$value.nome_razao}</a>
+                                    </td>
+                                    <td>{$value.no_atividade}</td>
+                                    <td>{$value.telefone}</td>
+                                    <td style="text-transform: uppercase; " >{$value.contato}</td>
+                                    <td>
+                                        <a title="Enviar E-mail para {$value.nome_razao}" alt="Enviar E-mail para {$value.nome_razao}" href="mailto:{$value.email_fc">
+                                            <span style="width: 25px" class="glyphicon glyphicon-send icons" aria-hidden="true"></span>
+                                        </a>
+                                        <a style="margin-left: 10%;" href="/fornecedor/{$value.pk_tb_id_fornecedor_consultor}" title="Editar" alt="Editar">
+                                            <span style="width: 25px" class="glyphicon glyphicon-pencil icons" aria-hidden="true"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/loop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

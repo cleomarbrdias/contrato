@@ -1,0 +1,255 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            ENCAMINHAMENTO PARA PAGAMENTO
+        </h1>
+  
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Nº do Contrato: <strong style="font-weight: 600; ">{$numero_contrato}</strong> </label> 
+                        </div>
+                        <div class="form-group">
+                            <label>Contratado: <strong style="font-weight: 600; ">{$contratado}</strong> </label>
+                        </div>
+
+
+                        <form action="/produto/create"  method="post" id="produto" name="produto"  novalidate class="form-horizontal">
+
+
+                            <input type="hidden" id="numerocontrato" name="numerocontrato" value='{$idcontrato}'>
+                            <!-- Text input-->
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label" >Nº do Documento Fiscal</label>
+
+                                <div class="col-md-2 input-group ">
+                                    <input style="width: 150px;" type="text" ng-model="c.notafiscal"  class="form-control" id="notafiscal" name="notafiscal" maxlength="9">
+                                 </div>
+                              
+                            </div>
+                            <div class="form-group" >
+                                    <label class="col-md-3 control-label" >Entrada do documento<span class="campoobrigatorio"> *</span></label>
+
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input style="width: 150px;" type="text" ng-model="c.dt_entrada_produto" ng-required="true" required="true" class="form-control" id="dt_entrada_produto" name="dt_entrada_produto">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+
+                                    </div>
+
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="produto.dt_entrada_produto.$error.required && produto.dt_entrada_produto.$touched" class="alert danger">Por favor, informa a data de entrada</div>
+
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" >Saída do documento</label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input style="width: 150px;" type="text" ng-model="c.dt_saida_produto" class="form-control" id="dt_saida_produto" name="dt_saida_produto">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="produto.dt_saida_produto.$error.required && produto.dt_saida_Pagamento.$touched" class="alert danger">Por favor, informa a data de saída</div>
+
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" >Objeto/Serviço/Produto<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-6">
+
+                                    <textarea class="form-control" ng-minlength="20"  ng-model="c.descricao_produto" ng-required="" required name='descricao_produto' id="descricao_produto" rows="4"
+                                              maxlength="600"></textarea>
+
+                                    <div style="width: 100%;" ng-show="produto.descricao_produto.$error.required && produto.descricao_produto.$touched" class="alert danger">Por favor, realizar a descrição do Pagamento.</div>
+                                    <div ng-show="produto.descricao_produto.$error.minlength" class="alert danger">
+                                        O campo deve conter pelo menos 20 caracteres de descrição do objeto.</div>
+                                </div>
+
+                            </div> 
+
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Mês de Referência<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input ng-required="true" style="width: 150px;" ng-model="c.mes_produto" type="text" class="form-control" id="mes_produto" name="mes_produto" required>
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                    <span class="aviso"></span>
+
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="produto.mes_produto.$error.required && produto.mes_produto.$touched" class="alert danger">Por favor, informa data/mês de referência</div>
+
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label" >Nome do Evento</label>
+
+                                <div class="col-md-3 input-group ">
+                                    <input style="width: 550px;" type="text" ng-model="c.nomeevento"  class="form-control" id="nomeevento" name="nomeevento">
+                                 </div>
+                              
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Início do Evento</label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker" style="margin-bottom: 3px;">
+                                    <input ng-model="c.dt_inicio_evento" style="width: 150px;" type="text" class="form-control" id="dt_inicio_evento" name="dt_inicio_evento">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="produto.dt_inicio_evento.$error.required && produto.dt_inicio_evento.$touched" class="alert danger">Por favor, informa data inicio do evento</div>
+
+                                <label class="col-md-3 control-label" >Término do Evento</label>
+                                <div class="col-md-2 input-group date" data-provide="datepicker">
+                                    <input ng-model="c.dt_fim_evento" style="width: 150px;" type="text" class="form-control" id="dt_fim_evento" name="dt_fim_evento">
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div style="width: 50%; margin-left: 10%;" ng-show="produto.dt_fim_evento.$error.required && produto.dt_fim_evento.$touched" class="alert danger">Por favor, informa data fim do evento</div>
+
+                            </div>
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label" >Quantidade de participantes</label>
+
+                                <div class="col-md-2 input-group ">
+                                    <input style="width: 100px;" type="number" ng-model="c.nparticipantes"  class="form-control" id="nparticipantes" name="nparticipantes">
+                                 </div>
+                              
+                            </div>
+
+
+                            <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-md-3 control-label" >Tipo de Despesas<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-5">
+                                    <select id="fonte_recurso" ng-model="c.categoria" ng-required="true" name="categoria" class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" >
+                                        {loop="$categoria"}
+
+                                        <option value="{$value.id_categoria}">{$value.no_categoria}</option>
+                                        {/loop}
+                                    </select>
+                                    <div ng-show="produto.fonte_recurso.$error.required && produto.fonte_recurso.$touched" class="alert danger">
+                                        Por favor selecionar fonte de recurso.</div>
+                                </div>
+                            </div>
+                                                   <div class="form-group">
+                                <label class="col-md-3 control-label" >Meta alcançada</label>
+                                <div class="col-md-5">
+                                    <select id="fonte_recurso" ng-model="c.avaliacao" ng-required="true" name="avaliacao" class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" >
+                                        {loop="$avaliacao"}
+
+                                        <option value="{$value.id_avaliacao}">{$value.no_avaliacao}</option>
+                                        {/loop}
+                                    </select>
+                                    <div ng-show="produto.avaliacao.$error.required && produto.avaliacao.$touched" class="alert danger">
+                                        Por favor realizar avaliação.</div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-md-3 control-label" >Observação</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" ng-minlength="20"  ng-model="c.observacao" ng-required="true" name='observacao' id="observacao" rows="4"
+                                              maxlength="600"></textarea>
+                               <div ng-show="produto.observacao.$error.minlength" class="alert danger">
+                                        O campo deve conter pelo menos 20 caracteres de descrição do objeto.</div>
+                                </div>
+                             </div>
+                             <div class="form-group">
+                                <label class="col-md-3 control-label" >Ação</label>
+                                <div class="col-md-5">
+                                    <select id="fonte_recurso" ng-model="c.acao" name="acao" class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" >
+                                        {loop="$acao"}
+
+                                        <option value="{$value.id_acao}">{$value.no_acao}</option>
+                                        {/loop}
+                                    </select>
+                                    <div ng-show="produto.fonte_recurso.$error.required && produto.fonte_recurso.$touched" class="alert danger">
+                                        Por favor selecionar fonte de recurso.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" >Fonte de Recurso<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-5">
+                                    <select id="fonte_recurso" ng-model="c.fonte_recurso" ng-required="true" name="fonte_recurso" class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" >
+                                        {loop="$fontesRecursos"}
+
+                                        <option value="{$value.id_fonte_recurso}">{$value.nome_fonte_recurso}</option>
+                                        {/loop}
+                                    </select>
+                                    <div ng-show="produto.fonte_recurso.$error.required && produto.fonte_recurso.$touched" class="alert danger">
+                                        Por favor selecionar fonte de recurso.</div>
+                                </div>
+                            </div>
+                               <div class="form-group">
+                                <label class="col-md-3 control-label" >Centro de Custo<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-5">
+                                   <input ng-model="c.centrodecusto" ng-required="true" style="width: 150px;" type="text" class="form-control" id="centrodecusto" name="centrodecusto">
+
+                                    <div ng-show="produto.centrodecusto.$error.required && produto.centrodecusto.$touched" class="alert danger">
+                                        Por favor informa o centro de custo.</div>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Valor Bruto<span class="campoobrigatorio"> *</span></label>
+                                <div class="col-md-4">
+                                    <input ng-required="true" ng-model="c.valor_bruto" required="" id="valor_bruto" name="valor_bruto" value="" placeholder="0.000,00" class="form-control input-md" >
+
+                                </div>
+                                <div ng-show="produto.valor_bruto.$error.required && produto.valor_bruto.$touched" class="alert danger">
+                                    Por favor, informa valor.</div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="submit"></label>
+                                <div class="col-md-4">
+                                    <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                                    <button class="btn btn-primary adiciona" type="submit" ng-disabled="!c.dt_entrada_produto || !c.descricao_produto || !c.mes_produto || !c.categoria || !c.fonte_recurso || !c.centrodecusto || !c.valor_bruto">Gravar</button>
+
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+
+
+
+
+
+

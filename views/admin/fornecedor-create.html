@@ -1,0 +1,128 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-body">
+                        <form action="/fornecedor/create" id="pjForm" name="pjForm" class="form-horizontal col-sm-8 ng-pristine ng-valid" method="POST">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <div class="panel panel-success"> 
+                                    <div class="panel-heading"> 
+                                        <h3 class="panel-title">Cadastro de Fornecedor</h3> 
+                                    </div> 
+                                    <div class="panel-body"> 
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="nome">Razão Social</label>  
+                                            <div class="col-md-8">
+                                                <input id="razao_social"  ng-required="true" name="razao_social" type="text" placeholder="Razão Social" class="form-control input-md"  required="required">
+                                                <span class="aviso"></span>
+                                                <input  id="id_registro" name="id_registro" type="hidden" class="form-control input-md" required="">
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%" ng-show="pjForm.razao_social.$error.required & amp; & amp; pjForm.razao_social.$dirty" class="alert danger ng-hide">
+                                            Por favor preencher campo!
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="nome">Nome Fantasia</label>  
+                                            <div class="col-md-5">
+                                                <input  id="nome_fantasia" name="nome_fantasia" type="text" placeholder="Nome Fantasia" class="form-control input-md">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="nome">Contato</label>  
+                                            <div class="col-md-5">
+                                                <input  maxlength="15" id="contato"  name="contato" type="text" placeholder="Nome para contato" class="form-control input-md">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="cpf">CNPJ:</label>  
+                                            <div class="col-md-4">
+                                                <input  autocomplete="off" required="" maxlength="18" id="cnpj" ng-minlength="18" OnKeyPress="formatar('##.###.###/####-##', this)" name="cnpj" type="text" placeholder="00.000.000/0000-00" class="form-control input-md">
+                                                <span class="aviso"></span>
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%" ng-show="pjForm.cnpj.$error.minlength & amp; & amp; pjForm.cnpj.$dirty" class="alert danger ng-hide">
+                                            O campo CNPJ deve conter 14 caracteres.!!
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="endereco">Endereço:</label>  
+                                            <div class="col-md-7">
+                                                <textarea  id="endereco" name="endereco" placeholder="Rua 11 Q. 305" class="form-control input-md"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="cep">CEP:</label>  
+                                            <div class="col-md-4">
+                                                <input  id="cep" maxlength="10"  name="cep" type="text" onkeypress="formatar('##.###-###', this)" placeholder="00.000-000" class="form-control input-md">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="email">E-Mail:</label>  
+                                            <div class="col-md-6">
+                                                <input  id="email"  name="email" type="text" placeholder="exemplo@exemplo.com.br" class="form-control input-md">
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="telefone">Telefone:</label>  
+                                            <div class="col-md-4">
+                                                <input id="telefone" name="telefone" type="text" placeholder="(00)0000-0000" class="form-control input-md telefone">
+                                            </div>
+                                        </div>
+                                        <!-- Select Basic -->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="selectbasic">Atividade</label>
+                                            <div class="col-md-5">
+                                                <select  required="" id="tipo_atividade" name="tipo_atividade" class="form-control" style="width: 130% !important;">
+                                                    <option selected="" disabled></option>
+                                                    {loop="$listAtividade"}
+                                                    <option value="{$value.fk_id_atividade}">{$value.no_atividade}</option>
+                                                    {/loop}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="width: 50%" ng-show="pjForm.tipo_atividade.$error.$touched" class="alert danger ng-hide">
+                                            Por favor selecione uma atividade!
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            
+                                            <div class="col-md-4">
+                                                <a href="/fornecedor" class="btn btn-large btn-danger" title="Cancelar" >Cancelar</a>  
+                                                <button class="btn btn-primary adiciona" type="submit" >Gravar</button>
+                                                                                           </div>
+                                        </div> 
+                                    </div> 
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+

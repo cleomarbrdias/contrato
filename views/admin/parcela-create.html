@@ -1,0 +1,115 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            ADICIONAR - PARCELA 
+        </h1>
+
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Nº do Contrato: <strong style="font-weight: 600; ">{$numero_contrato}</strong> </label> 
+                        </div>
+                        <div class="form-group">
+                            <label>Contratado: <strong style="font-weight: 600; ">{$contratado}</strong> </label>
+                        </div>
+
+
+                        <form action="/parcela/create"  method="post" id="aditivo" name="aditivo"  novalidate class="form-horizontal">
+
+                                
+                            <input name="confparcela" id="confparcela" type="hidden" value="0">
+                            <input id="numero_contrato" name="fk_contrato" type="hidden" value="{$idcontrato}">
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Parcelas:</label><br>
+                                <div class="col-md-4">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Data</th>
+                                                <th>Valor</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="col-md-3 input-group date" data-provide="datepicker">
+                                                        <input style="width: 150px;" type="text" ng-model="c.dataparcela" required="" class="form-control" id="dataparcela" name="dataparcela">
+                                                        <div class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-th"></span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td><input name="envalorparcela" id="envalorparcela" ng-model="c.envalorparcela" required="" class="form-control" style="width: 150px;" ></td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="5" style="text-align: left; padding: 2% 2% 3% 0;">
+                                                    <button class="btn btn-large adiciona" ng-disabled="!c.dataparcela || !c.envalorparcela" onclick="AddTableRow(this)" type="button">Adicionar Parcelas</button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Parcelas Adicionadas</label><br>
+                                <div class="col-md-4">
+                                    <table id="products-table" class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th style='width: 200px'   class="bd_titulo">Data</th>
+                                                <th style='width: 200px'  class="bd_titulo">Valor da parcelas</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> 
+                            </div>
+                            <div class="form-group text-center">
+                                <button class="btn btn-danger " type="reset" onClick="history.go(-1)">Cancelar</button>
+                                <button class="btn btn-primary adiciona" type="submit">Gravar</button>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+﻿<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Lista de Contratos
+        </h1>
+      
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    {if="$error != ''"}
+                    <div class="alert alert-danger">
+                        {$error}
+                    </div>
+                    {/if}
+
+                    <div class="box-header" style="background: none !important;">
+                        <a href="/contrato/create" class="btn btn-success">Cadastrar Contrato</a>
+                    </div>
+                    <div class="box-body">
+                        <table id="tableContratos" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nº Contrato</th>
+                                    <th>Contratado</th>
+                                    <th>Início</th>
+                                    <th>Término</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {loop="$contrato"}
+                                <tr>
+
+                                    <td><a href="/contrato/{$value.pk_di}" class="link" title="Visualizar Contrato">{$value.numero_contrato}</a>
+                                        <a href="/aditivo/create/{$value.pk_di}" title="Adicionar Aditivo">
+                                            <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td>{$value.nome_razao}</td>
+                                    <td>{$value.data_inicio}</td>
+                                    <td>{$value.data_fim}</td/>
+                                    <td><span class="info-box-number">R$ {$value.valor_total}</span></td>
+                                </tr>
+                                {/loop}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- DataTables -->
+
